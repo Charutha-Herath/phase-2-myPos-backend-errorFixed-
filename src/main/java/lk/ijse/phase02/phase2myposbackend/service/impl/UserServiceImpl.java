@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
+    /*@Override
     public UserStatus getUserByEmail(String email) {
         if(userDao.existsById(email)){
             UserEntity selectedUser = userDao.findByEmail(email);
@@ -39,5 +39,5 @@ public class UserServiceImpl implements UserService {
         }else {
             return new SelectedUserErrorStatus(2, "User with email " + email + " not found");
         }
-    }
+    }*/
 }

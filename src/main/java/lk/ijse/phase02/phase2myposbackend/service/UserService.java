@@ -8,5 +8,5 @@ public interface UserService {
 
     void saveUser(UserDTO userDTO);
 
-    UserStatus getUserByEmail(String email);
+    //UserStatus getUserByEmail(String email);
 }
