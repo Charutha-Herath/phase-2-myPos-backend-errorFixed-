@@ -1,4 +1,4 @@
-package lk.ijse.phase02.phase2myposbackend.config.controller;
+package lk.ijse.phase02.phase2myposbackend.controller;
 
 
 import lk.ijse.phase02.phase2myposbackend.customStatusCodes.SelectedUserErrorStatus;
@@ -8,18 +8,20 @@ import lk.ijse.phase02.phase2myposbackend.exception.DataPersistException;
 import lk.ijse.phase02.phase2myposbackend.service.UserService;
 import lk.ijse.phase02.phase2myposbackend.util.AppUtil;
 import lk.ijse.phase02.phase2myposbackend.util.RegexProcess;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveUser(
             @RequestPart("name") String name,
@@ -27,16 +29,19 @@ public class UserController {
             @RequestPart("password")String password
     ){
         try {
+            System.out.println("Awoooo...... \n\n");
 
             UserDTO buildUserDTO = new UserDTO();
 
             String userId = AppUtil.generateUserId();
 
+            System.out.println("\n"+name+" \n"+email+" \n"+password);
+
             buildUserDTO.setUserId(userId);
             buildUserDTO.setName(name);
             buildUserDTO.setEmail(email);
             buildUserDTO.setPassword(password);
-
+            System.out.println("buildUser : "+buildUserDTO.toString());
             userService.saveUser(buildUserDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (DataPersistException e){
@@ -53,7 +58,8 @@ public class UserController {
         if(!RegexProcess.userEmailMatcher(email)){
             return new SelectedUserErrorStatus(1,"User email not valid");
         }
-        return userService.getUserByEmail(email);
+        //return userService.getUserByEmail(email);
+        return null;
     }
 
 }
