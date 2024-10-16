@@ -40,7 +40,7 @@ public class WebAppRootConfig {
         vendorAdapter.setGenerateDdl(true);
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("lk.ijse.phase02.entity");
+        factory.setPackagesToScan("lk.ijse.phase02.phase2myposbackend.entity.impl");
         factory.setDataSource(dataSource());
         return factory;
     }
