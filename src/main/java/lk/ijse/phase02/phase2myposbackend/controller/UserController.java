@@ -54,12 +54,15 @@ public class UserController {
     }
 
     @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserStatus getSelectedUserByEmail(@PathVariable ("email") String email){
+    public UserStatus getSelectedUserByEmail(@PathVariable("email") String email){
         if(!RegexProcess.userEmailMatcher(email)){
+
+            System.out.println(email+"  Not valid \n\n");
             return new SelectedUserErrorStatus(1,"User email not valid");
         }
-        //return userService.getUserByEmail(email);
-        return null;
+        System.out.println(email+"  valid \n\n");
+        return userService.getUserByEmail(email);
+
     }
 
 }
