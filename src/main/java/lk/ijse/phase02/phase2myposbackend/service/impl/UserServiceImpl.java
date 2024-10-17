@@ -31,13 +31,15 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    /*@Override
+    @Override
     public UserStatus getUserByEmail(String email) {
-        if(userDao.existsById(email)){
+
             UserEntity selectedUser = userDao.findByEmail(email);
+            System.out.println("User details : "+selectedUser.toString());
+        if(selectedUser!= null){
             return mapping.toUserDTO(selectedUser);
         }else {
             return new SelectedUserErrorStatus(2, "User with email " + email + " not found");
         }
-    }*/
+    }
 }
