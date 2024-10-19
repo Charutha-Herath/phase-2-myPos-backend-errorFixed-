@@ -1,5 +1,6 @@
 package lk.ijse.phase02.phase2myposbackend.entity.impl;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -17,6 +18,7 @@ import java.io.Serializable;
 public class CustomerEntity implements Serializable {
 
     @Id
+    @Column(name = "customerId")
     private String customerId;
     private String customerName;
     private String contact;
