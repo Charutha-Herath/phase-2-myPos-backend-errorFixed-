@@ -27,15 +27,31 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerStatus getNextNewId() {
-        CustomerEntity customerEntity = customerDao.generateNextNewId();
-        CustomerDTO customerDTO = customerMapping.toCustomerDTO(customerEntity);
-        String id = customerDTO.getCustomerId();
+        String Newid = customerDao.generateNextNewId();
+        System.out.println("NewId : "+Newid);
+        //CustomerEntity customerEntity = customerDao.generateNextNewId();
+        CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setCustomerId(Newid);
+        String id = (customerEntity != null) ? customerEntity.getCustomerId() : null;
 
-        if (id == null){
-            return "Cust-0001";
-        }else {
-            int nextId = Integer.parseInt(id.substring(5))+1;
-            return "Cust-" + String.format("%04d",nextId);
+        if (id == null) {
+            // If no ID exists, return the first
+            return new CustomerStatus() {
+                @Override
+                public String getCustomerId() {
+                    return "Cust-0001";
+                }
+            };
+        } else {
+            // Extract the numeric part and increment it
+            int nextId = Integer.parseInt(id.substring(5)) + 1;
+            String newId = "Cust-" + String.format("%04d", nextId);
+            return new CustomerStatus() {
+                @Override
+                public String getCustomerId() {
+                    return newId;
+                }
+            };
         }
     }
 }
