@@ -15,4 +15,10 @@ public class RegexProcess {
         return regexPattern.matcher(id).matches();
     }
 
+    public static boolean ItemIdMatcher(String id) {
+        String regexForItemId = "^item-\\d{4}$";
+        Pattern regexPattern = Pattern.compile(regexForItemId);
+        return regexPattern.matcher(id).matches();
+    }
+
 }
