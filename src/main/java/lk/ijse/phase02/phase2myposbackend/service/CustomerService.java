@@ -8,4 +8,6 @@ public interface CustomerService {
     void saveCustomer(CustomerDTO customerDTO);
 
     CustomerStatus getNextNewId();
+
+    void updateCustomer(String custId, CustomerDTO customerDTO);
 }
