@@ -5,6 +5,7 @@ import lk.ijse.phase02.phase2myposbackend.dao.CustomerDao;
 import lk.ijse.phase02.phase2myposbackend.dto.CustomerStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.impl.CustomerDTO;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.CustomerEntity;
+import lk.ijse.phase02.phase2myposbackend.exception.DataPersistException;
 import lk.ijse.phase02.phase2myposbackend.service.CustomerService;
 import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao customerDao;
     @Autowired
-    private Mapping customerMapping;
+    private Mapping mapping;
 
 
     @Override
     public void saveCustomer(CustomerDTO customerDTO) {
+        CustomerEntity savedCustomer = customerDao.save(mapping.toCustomerEntity(customerDTO));
 
+        if (savedCustomer == null) {
+            throw new DataPersistException("User not saved");
+        }
     }
 
     @Override
