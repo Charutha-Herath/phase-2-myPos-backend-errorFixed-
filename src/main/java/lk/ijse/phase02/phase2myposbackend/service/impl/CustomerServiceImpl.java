@@ -12,6 +12,7 @@ import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -75,6 +76,21 @@ public class CustomerServiceImpl implements CustomerService {
             findCustomer.get().setContact(customerDTO.getContact());
 
         }
+    }
+
+    @Override
+    public void deleteCustomer(String customerId) {
+        Optional<CustomerEntity> findCustomer = customerDao.findById(customerId);
+        if (!findCustomer.isPresent()) {
+            throw new CustomerNotFoundException("Customer not found");
+        }else {
+            customerDao.deleteById(customerId);
+        }
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomer() {
+        return mapping.asCustomerDTOList( customerDao.findAll());
     }
 
 
