@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.ServerSocket;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/customer")
@@ -59,6 +60,28 @@ public class CustomerController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @DeleteMapping(value = "/{customerId}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable ("customerId") String customerId){
+        try {
+            if (!RegexProcess.customerIdMatcher(customerId)) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            customerService.deleteCustomer(customerId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (CustomerNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CustomerDTO> getALlNotes(){
+        return customerService.getAllCustomer();
     }
 
 }
