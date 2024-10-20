@@ -5,11 +5,14 @@ import lk.ijse.phase02.phase2myposbackend.dao.CustomerDao;
 import lk.ijse.phase02.phase2myposbackend.dto.CustomerStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.impl.CustomerDTO;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.CustomerEntity;
+import lk.ijse.phase02.phase2myposbackend.exception.CustomerNotFoundException;
 import lk.ijse.phase02.phase2myposbackend.exception.DataPersistException;
 import lk.ijse.phase02.phase2myposbackend.service.CustomerService;
 import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -59,4 +62,20 @@ public class CustomerServiceImpl implements CustomerService {
             };
         }
     }
+
+    @Override
+    public void updateCustomer(String custId, CustomerDTO customerDTO) {
+
+        Optional<CustomerEntity> findCustomer = customerDao.findById(custId);
+        if (!findCustomer.isPresent()) {
+            throw new CustomerNotFoundException("Customer not found");
+        }else {
+            findCustomer.get().setCustomerName(customerDTO.getCustomerName());
+            findCustomer.get().setAddress(customerDTO.getAddress());
+            findCustomer.get().setContact(customerDTO.getContact());
+
+        }
+    }
+
+
 }
