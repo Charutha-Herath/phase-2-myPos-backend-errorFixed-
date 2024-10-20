@@ -9,4 +9,10 @@ public class RegexProcess {
         return regexPattern.matcher(email).matches();
     }
 
+    public static boolean customerIdMatcher(String id) {
+        String regexForCustomerId = "^cust-\\d{4}$";
+        Pattern regexPattern = Pattern.compile(regexForCustomerId);
+        return regexPattern.matcher(id).matches();
+    }
+
 }
