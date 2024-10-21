@@ -1,5 +1,6 @@
 package lk.ijse.phase02.phase2myposbackend.entity.impl;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @Table(name = "item")
 public class ItemEntity implements Serializable {
     @Id
+    @Column(name = "itemCode")
     private String itemCode;
     private String description;
     private String qty;
