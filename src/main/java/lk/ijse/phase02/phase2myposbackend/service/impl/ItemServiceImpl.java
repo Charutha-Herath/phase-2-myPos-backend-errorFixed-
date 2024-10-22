@@ -9,11 +9,15 @@ import lk.ijse.phase02.phase2myposbackend.dto.ItemStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.impl.ItemDTO;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.CustomerEntity;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.ItemEntity;
+import lk.ijse.phase02.phase2myposbackend.exception.CustomerNotFoundException;
 import lk.ijse.phase02.phase2myposbackend.exception.DataPersistException;
+import lk.ijse.phase02.phase2myposbackend.exception.ItemNotFoundException;
 import lk.ijse.phase02.phase2myposbackend.service.ItemService;
 import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -60,6 +64,26 @@ public class ItemServiceImpl implements ItemService {
 
         if (savedItem == null) {
             throw new DataPersistException("Item not saved");
+        }
+    }
+
+    @Override
+    public void updateItem(String itemId, ItemDTO itemDTO) {
+        Optional<ItemEntity> findItem = itemDao.findById(itemId);
+        if (!findItem.isPresent()) {
+            throw new ItemNotFoundException("Item not found");
+        }else {
+            findItem.get().setDescription(itemDTO.getDescription());
+            findItem.get().setPrice(itemDTO.getPrice());
+            findItem.get().setQty(itemDTO.getQty());
+/*
+            ItemEntity item = findItem.get();
+            item.setDescription(itemDTO.getDescription());
+            item.setPrice(itemDTO.getPrice());
+            item.setQty(itemDTO.getQty());
+
+            itemDao.save(item);*/
+
         }
     }
 }
