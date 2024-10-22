@@ -9,4 +9,6 @@ public interface ItemService {
     ItemStatus getNextNewItemId();
 
     void saveItem(ItemDTO itemDTO);
+
+    void updateItem(String itemId, ItemDTO itemDTO);
 }
