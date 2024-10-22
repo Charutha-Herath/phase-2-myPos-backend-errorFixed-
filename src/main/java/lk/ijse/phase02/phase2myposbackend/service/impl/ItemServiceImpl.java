@@ -17,6 +17,7 @@ import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -41,7 +42,7 @@ public class ItemServiceImpl implements ItemService {
             // If no ID exists, return the first
             return new ItemStatus() {
                 @Override
-                public String getItemId() {
+                public String getItemCode() {
                     return "Item-0001";
                 }
             };
@@ -51,7 +52,7 @@ public class ItemServiceImpl implements ItemService {
             String newId = "Item-" + String.format("%04d", nextId);
             return new ItemStatus() {
                 @Override
-                public String getItemId() {
+                public String getItemCode() {
                     return newId;
                 }
             };
@@ -95,5 +96,10 @@ public class ItemServiceImpl implements ItemService {
         }else {
             itemDao.deleteById(itemId);
         }
+    }
+
+    @Override
+    public List<ItemDTO> getAllItems() {
+        return mapping.asItemDTOList( itemDao.findAll());
     }
 }
