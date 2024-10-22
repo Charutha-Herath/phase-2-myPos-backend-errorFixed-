@@ -80,7 +80,7 @@ public class CustomerController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CustomerDTO> getALlNotes(){
+    public List<CustomerDTO> getAllCustomers(){
         return customerService.getAllCustomer();
     }
 
