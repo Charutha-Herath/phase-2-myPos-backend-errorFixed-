@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class PlaceOrderEntity implements Serializable {
 
     @Id
