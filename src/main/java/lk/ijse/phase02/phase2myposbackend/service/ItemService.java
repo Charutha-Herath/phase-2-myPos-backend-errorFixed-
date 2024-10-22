@@ -17,4 +17,6 @@ public interface ItemService {
     void deleteItem(String itemId);
 
     List<ItemDTO> getAllItems();
+
+    List<String> getAllItemIds();
 }

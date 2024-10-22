@@ -102,4 +102,10 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDTO> getAllItems() {
         return mapping.asItemDTOList( itemDao.findAll());
     }
+
+    @Override
+    public List<String> getAllItemIds() {
+        List<String> allItemIds = itemDao.findAllItemIds();
+        return allItemIds;
+    }
 }

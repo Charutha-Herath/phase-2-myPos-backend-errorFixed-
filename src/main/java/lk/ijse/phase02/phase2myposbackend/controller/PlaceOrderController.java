@@ -4,6 +4,7 @@ import lk.ijse.phase02.phase2myposbackend.dto.CustomerStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.ItemStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.PlaceOrderStatus;
 import lk.ijse.phase02.phase2myposbackend.service.CustomerService;
+import lk.ijse.phase02.phase2myposbackend.service.ItemService;
 import lk.ijse.phase02.phase2myposbackend.service.PlaceOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class PlaceOrderController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private ItemService itemService;
+
     //Generate New order Id
     @GetMapping("generateNextOrderId")
     public PlaceOrderStatus generateNewId(){
@@ -33,13 +37,19 @@ public class PlaceOrderController {
 
     //Get all customer ids
 
-    @GetMapping("getAllCustomerId")
+    @GetMapping("getAllCustomerIds")
     public List<String> getAllCustomerIds(){
         return customerService.getAllIds();
 
     }
 
     //Get all Item codes
+
+    @GetMapping("getAllItemIds")
+    public List<String> getAllItemIds(){
+        return itemService.getAllItemIds();
+
+    }
 
     //Get name by selected customer
 
