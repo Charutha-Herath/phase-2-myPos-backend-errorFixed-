@@ -6,7 +6,10 @@ import lk.ijse.phase02.phase2myposbackend.dao.ItemDao;
 
 import lk.ijse.phase02.phase2myposbackend.dto.ItemStatus;
 
+import lk.ijse.phase02.phase2myposbackend.dto.impl.ItemDTO;
+import lk.ijse.phase02.phase2myposbackend.entity.impl.CustomerEntity;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.ItemEntity;
+import lk.ijse.phase02.phase2myposbackend.exception.DataPersistException;
 import lk.ijse.phase02.phase2myposbackend.service.ItemService;
 import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,15 @@ public class ItemServiceImpl implements ItemService {
                     return newId;
                 }
             };
+        }
+    }
+
+    @Override
+    public void saveItem(ItemDTO itemDTO) {
+        ItemEntity savedItem = itemDao.save(mapping.toItemEntity(itemDTO));
+
+        if (savedItem == null) {
+            throw new DataPersistException("Item not saved");
         }
     }
 }
