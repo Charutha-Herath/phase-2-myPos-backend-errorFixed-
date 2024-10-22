@@ -16,7 +16,7 @@ public class RegexProcess {
     }
 
     public static boolean ItemIdMatcher(String id) {
-        String regexForItemId = "^item-\\d{4}$";
+        String regexForItemId = "^Item-\\d{4}$";
         Pattern regexPattern = Pattern.compile(regexForItemId);
         return regexPattern.matcher(id).matches();
     }
