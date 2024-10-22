@@ -1,6 +1,7 @@
 package lk.ijse.phase02.phase2myposbackend.controller;
 
 import lk.ijse.phase02.phase2myposbackend.dto.ItemStatus;
+import lk.ijse.phase02.phase2myposbackend.dto.PlaceOrderStatus;
 import lk.ijse.phase02.phase2myposbackend.service.PlaceOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,12 @@ public class PlaceOrderController {
 
     //Generate New order Id
     @GetMapping("generateNextOrderId")
-    public ItemStatus generateNewId(){
+    public PlaceOrderStatus generateNewId(){
         return placeOrderService.getNextNewOrderId();
 
     }
+
+
 
     //Get all customer ids
 
