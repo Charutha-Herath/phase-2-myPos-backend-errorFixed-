@@ -4,9 +4,11 @@ package lk.ijse.phase02.phase2myposbackend.util;
 
 import lk.ijse.phase02.phase2myposbackend.dto.impl.CustomerDTO;
 import lk.ijse.phase02.phase2myposbackend.dto.impl.ItemDTO;
+import lk.ijse.phase02.phase2myposbackend.dto.impl.PlaceOrderDTO;
 import lk.ijse.phase02.phase2myposbackend.dto.impl.UserDTO;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.CustomerEntity;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.ItemEntity;
+import lk.ijse.phase02.phase2myposbackend.entity.impl.PlaceOrderEntity;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.UserEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -46,5 +48,20 @@ public class Mapping {
 
     public List<ItemDTO> asItemDTOList(List<ItemEntity> itemEntities) {
         return modelMapper.map(itemEntities, new TypeToken<List<ItemDTO>>() {}.getType());
+    }
+
+
+
+
+    public PlaceOrderEntity toPlaceOrderEntity(PlaceOrderDTO placeOrderDTO) {
+        return modelMapper.map(placeOrderDTO, PlaceOrderEntity.class);
+    }
+
+    public PlaceOrderDTO toPlaceOrderDTO(PlaceOrderEntity placeOrderEntity) {
+        return modelMapper.map(placeOrderEntity, PlaceOrderDTO.class);
+    }
+
+    public List<PlaceOrderDTO> asPlaceOrderDTOList(List<PlaceOrderEntity> placeOrderEntities) {
+        return modelMapper.map(placeOrderEntities, new TypeToken<List<PlaceOrderDTO>>() {}.getType());
     }
 }
