@@ -93,5 +93,11 @@ public class CustomerServiceImpl implements CustomerService {
         return mapping.asCustomerDTOList( customerDao.findAll());
     }
 
+    @Override
+    public List<String> getAllIds() {
+        List<String> allCustomerIds = customerDao.findAllCustomerIds();
+        return allCustomerIds;
+    }
+
 
 }
