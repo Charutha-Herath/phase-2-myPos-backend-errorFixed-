@@ -18,4 +18,6 @@ public interface CustomerService {
     List<CustomerDTO> getAllCustomer();
 
     List<String> getAllIds();
+
+    String getCustomerName(String id);
 }

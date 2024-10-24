@@ -99,5 +99,16 @@ public class CustomerServiceImpl implements CustomerService {
         return allCustomerIds;
     }
 
+    @Override
+    public String getCustomerName(String id) {
+        String name = customerDao.getNameById(id);
+
+        CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setCustomerName(name);
+
+        String entityName = (customerEntity != null) ? customerEntity.getCustomerName() : null;
+        return entityName;
+    }
+
 
 }
