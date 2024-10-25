@@ -17,6 +17,7 @@ import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,5 +108,12 @@ public class ItemServiceImpl implements ItemService {
     public List<String> getAllItemIds() {
         List<String> allItemIds = itemDao.findAllItemIds();
         return allItemIds;
+    }
+
+    @Override
+    public Optional<ItemEntity> getAllItemDetailsById(String itemId) {
+        Optional<ItemEntity> itemEntity =  itemDao.findById(itemId);
+
+        return itemEntity;
     }
 }
