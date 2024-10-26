@@ -116,4 +116,9 @@ public class ItemServiceImpl implements ItemService {
 
         return itemEntity;
     }
+
+    @Override
+    public List<ItemEntity> updateItems(List<ItemEntity> itemsToUpdate) {
+        return itemDao.saveAll(itemsToUpdate);
+    }
 }

@@ -23,4 +23,6 @@ public interface ItemService {
     List<String> getAllItemIds();
 
     Optional<ItemEntity> getAllItemDetailsById(String itemId);
+
+    List<ItemEntity> updateItems(List<ItemEntity> itemsToUpdate);
 }

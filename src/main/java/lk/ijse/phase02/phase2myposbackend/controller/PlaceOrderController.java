@@ -71,6 +71,12 @@ public class PlaceOrderController {
     }
 
     //Batch update in item table
+    @PutMapping("updateRows")
+    public ResponseEntity<List<ItemEntity>> updateItems(@RequestBody List<ItemEntity> itemsToUpdate) {
+        List<ItemEntity> updatedItems = itemService.updateItems(itemsToUpdate);
+        return ResponseEntity.ok(updatedItems);
+    }
+
 
     //save order details table (click purchase)
 
