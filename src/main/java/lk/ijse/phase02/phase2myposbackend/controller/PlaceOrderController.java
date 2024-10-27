@@ -4,11 +4,15 @@ import lk.ijse.phase02.phase2myposbackend.dto.CustomerStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.ItemStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.PlaceOrderStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.impl.ItemDTO;
+import lk.ijse.phase02.phase2myposbackend.dto.impl.PlaceOrderDTO;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.ItemEntity;
+import lk.ijse.phase02.phase2myposbackend.exception.DataPersistException;
 import lk.ijse.phase02.phase2myposbackend.service.CustomerService;
 import lk.ijse.phase02.phase2myposbackend.service.ItemService;
 import lk.ijse.phase02.phase2myposbackend.service.PlaceOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,6 +83,19 @@ public class PlaceOrderController {
 
 
     //save order details table (click purchase)
-
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> saveItems(@RequestBody PlaceOrderDTO placeOrderDTO) {
+        try {
+            placeOrderService.saveOrder(placeOrderDTO);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }catch (DataPersistException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

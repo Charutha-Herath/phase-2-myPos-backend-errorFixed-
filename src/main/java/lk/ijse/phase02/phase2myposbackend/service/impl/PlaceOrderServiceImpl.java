@@ -4,8 +4,10 @@ import jakarta.transaction.Transactional;
 import lk.ijse.phase02.phase2myposbackend.dao.PlaceOrderDao;
 import lk.ijse.phase02.phase2myposbackend.dto.ItemStatus;
 import lk.ijse.phase02.phase2myposbackend.dto.PlaceOrderStatus;
+import lk.ijse.phase02.phase2myposbackend.dto.impl.PlaceOrderDTO;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.ItemEntity;
 import lk.ijse.phase02.phase2myposbackend.entity.impl.PlaceOrderEntity;
+import lk.ijse.phase02.phase2myposbackend.exception.DataPersistException;
 import lk.ijse.phase02.phase2myposbackend.service.PlaceOrderService;
 import lk.ijse.phase02.phase2myposbackend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,15 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
                     return newId;
                 }
             };
+        }
+    }
+
+    @Override
+    public void saveOrder(PlaceOrderDTO placeOrderDTO) {
+        PlaceOrderEntity saveOrder = placeOrderDao.save(mapping.toPlaceOrderEntity(placeOrderDTO));
+
+        if (saveOrder == null) {
+            throw new DataPersistException("Item not saved");
         }
     }
 }
